@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 import datetime
 
-def get_monthly_rates(base_currency, converted_currency, amount_of_days):
+def get_historical_rates(base_currency, converted_currency, amount_of_days):
 
     # sets the start date
     today_date = datetime.datetime.now()
@@ -19,6 +19,7 @@ def get_monthly_rates(base_currency, converted_currency, amount_of_days):
     except Exception as e:
         print("Error:", e)
         # load sample file
+        print("loading data from sample file.........")
         data = pd.read_json("test.json")
         return data
 
@@ -39,9 +40,9 @@ def pre_process_data(data):
     return df
 
 def cleanup_data(df):
-    
+
     #Drop the records for which the rate is null
-    df.dropna(inplace = True)
+    df['exchange_rate'] = df['exchange_rate'].fillna((df['exchange_rate'].mean()))
 
     #Drop duplicates
     df.drop_duplicates(inplace = True)
@@ -59,7 +60,7 @@ def get_mean_exchange_rate(df):
 
 
 def main():
-    data = get_monthly_rates('AUD','NZD',30)
+    data = get_historical_rates('AUD','NZD',30)
     processed_data = pre_process_data(data)
     result = cleanup_data(processed_data)
     min = get_worst_exchange_rate(result)
@@ -71,4 +72,5 @@ def main():
     print("best exhange rate = ", max, " on the date",  result.loc[result.exchange_rate.idxmax(), 'date'])
     print("mean exhange rate = ", mean)
 
-main()
+if __name__ == "__main__":
+    main()
