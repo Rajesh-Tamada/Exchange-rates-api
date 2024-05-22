@@ -1,7 +1,12 @@
 # Exchange-rates-api
 
 ## Project overview
-   This project gets the exchange rates for given number of days (30) from AUD to  NZD exchanges rates, analyzes the json data and prints the worst, best and mean of the exchange rates. 
+   This project extracts/streams the exchange rates from opensource API from AUD to  NZD for a given number of days (30)
+ # Scope:
+    Aanalyze the extracted json output, pre process the file and transform the data to extract/prints the worst, best and mean of the exchange rates for a given month.
+ # Acceptence criteria:
+   Extracted output should match with the market rates and test case scenarios.
+   
 ## Setup
   
 ### Prerequisites:
@@ -44,7 +49,7 @@ mean exhange rate =  ***
 The script has the following steps:
 
 1. ### Data Acquisition: 
-    - `get_historical_rates(base_currency, converted_currency, amount_of_days)` : This function builds the API request to get the exchange rates from exchangeratesapi for the given source , target and date range which is no of days past from current date to current date.
+    - `get_historical_rates(base_currency, converted_currency, amount_of_days)` : This function builds the API request to get the exchange rates from exchangeratesapi for the given source , target and date range which is no of days past from current date to current date - 30 days.
     - If there is any error in the response from API, this function loads the sample data from test.json. And the retrieved data is stored in a pandas DataFrame.
     - Please note that the current subscription plan does not support the API which is being used in this function. So it gives the following error and loads data from test.json.    
    ```
@@ -58,7 +63,7 @@ The script has the following steps:
     - The desired format is then stored in pandas dataframe and returns for further processing.  
 
 3. ### Data Cleanup:
-    - `cleanup_data(df)` : This function checks data for duplicates and null values. Drops the duplicates and replaces nulls with mean value.  
+    - `cleanup_data(df)` : This function checks data for duplicates,data types and null values. Drops the duplicates and replaces nulls with mean value.  
     
 4. ### statistics:
     - `get_worst_exchange_rate(df)`: This function returns min exchange rate value.  
