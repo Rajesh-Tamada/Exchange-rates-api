@@ -31,11 +31,13 @@ OR
 
  Jupyter Notebook : Open jupyter Notebook and navigate to the directory where `exchange_rate.ipynb` file is located. Open the file and run the cells in the notebook to execute the script.
  
-This will generate the following output in the command prompt or jupyter notebook:
+This will generate the following output in the command prompt or jupyter notebook:            
+```
 ***********statistics*****************
 worst exhange rate =  ***  on the date ****
 best exhange rate =  ***  on the date ****
 mean exhange rate =  ***
+```
 
 ## Approach
 
@@ -45,9 +47,11 @@ The script has the following steps:
     - get_historical_rates(base_currency, converted_currency, amount_of_days) : This function builds the API request to get the exchange rates from exchangeratesapi for the given source , target and date range which is no of days past from current date to current date.
     - If there is any error in the response from API, this function loads the sample data from test.json. And the retrieved data is stored in a pandas DataFrame.
     - Please note that the current subscription plan does not support the API which is being used in this function. So it gives the following error and loads data from test.json.    
+   ```
     Error: 403 Client Error: Forbidden for url: https://api.exchangeratesapi.io/v1/timeseries?access_key=b9cb3955b3ecdfe9632d1c45a1251bdd&base=AUD&start_date=2024-04-22&end_date=2024-05-
     22
     loading data from sample file.........
+   ```
     
 2. Data pre processing:
     - pre_process_data(data) : This function gets the dataframe from the response json and creates the dictionary to process the data and store it in desired format [ { date: <value>, exchange_rate: <value> }, ... ]
