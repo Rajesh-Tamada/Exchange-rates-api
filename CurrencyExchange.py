@@ -1,3 +1,4 @@
+# Notebook to connect exchange rate api and stream the data 
 import requests
 import pandas as pd
 import datetime
@@ -23,7 +24,7 @@ def get_historical_rates(base_currency, converted_currency, amount_of_days):
         data = pd.read_json("test.json")
         return data
 
-
+# Pre processing the files to desigred structure
 def pre_process_data(data):
     
     # Desired format:
@@ -39,6 +40,7 @@ def pre_process_data(data):
     df = pd.DataFrame(hist_data)    
     return df
 
+# Data check and replace for datatypes, nulls etc 
 def cleanup_data(df):
 
     #Replace the records with mean value for which the rate is null
@@ -49,6 +51,7 @@ def cleanup_data(df):
 
     return df
 
+# trasformation methods to call
 def get_worst_exchange_rate(df):
     return df['exchange_rate'].min()
 
