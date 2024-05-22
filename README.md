@@ -21,7 +21,7 @@
  pip install requests datetime pandas
 ```
 
-## EXECUTION
+## Execution
 
  Command line: Open the command line interface and navigate to the directory where the script `CurrentExchange.py` is located and execute the following command:
    
