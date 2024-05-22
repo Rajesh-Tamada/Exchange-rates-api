@@ -41,7 +41,7 @@ def pre_process_data(data):
 
 def cleanup_data(df):
 
-    #Drop the records for which the rate is null
+    #Replace the records with mean value for which the rate is null
     df['exchange_rate'] = df['exchange_rate'].fillna((df['exchange_rate'].mean()))
 
     #Drop duplicates
